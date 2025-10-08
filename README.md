@@ -88,3 +88,28 @@ int yyerror(){
   f=1;
   exit(0);
 }
+
+lexical anayalicer
+
+%{
+#include<stdio.h>
+%}
+
+%%
+"if"|"else"|"while"|"for"|"switch"|"break"|"continue"|"do"    {printf("%s is a Keyword\n", yytext);}
+"||"|"&&"                                                      {printf("%s is a Logical operator\n", yytext);}
+[A-Za-z][A-Za-z0-9]*                                           {printf("%s is an Identifier\n", yytext);}
+[0-9]+                                                         {printf("%s is a Number\n", yytext);}
+"=="|"!="|"<="|">="|"<"|">"                                   {printf("%s is a Relational operator\n", yytext);}
+"*"|"/"|"+"|"-"|"%"                                           {printf("%s is an Arithmetic operator\n", yytext);}
+"="                                                            {printf("%s is an Assignment operator\n", yytext);}
+"++"                                                           {printf("%s is an Increment operator\n", yytext);}
+"--"                                                           {printf("%s is a Decrement operator\n", yytext);}
+.                                                              {printf("%s is Invalid\n", yytext);}
+%%
+
+int main(int argc, char *argv[])
+{
+    yyin = fopen(argv[1], "r");
+    yylex();
+}
