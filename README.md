@@ -1,6 +1,8 @@
 Target code generator 
 
-#include<stdio.h>
+#include<stdio.h>![IMG-20251008-WA0009](https://github.com/user-attachments/assets/d8891ed5-3e34-4828-86df-0cf5b99dbb8d)
+![IMG-20251008-WA0008](https://github.com/user-attachments/assets/cdf030d1-d1a6-4bce-a229-817a38052805)
+
 #include<string.h>
 
 char op[2], arg1[5], arg2[5], result[5];
@@ -113,3 +115,22 @@ int main(int argc, char *argv[])
     yyin = fopen(argv[1], "r");
     yylex();
 }
+
+
+word
+
+%{ #include<stdio.h> 
+int words=0,ch=0,line=0; 
+%} 
+%% 
+[A-Z|a-z]" " {words++;ch++;} 
+[A-Z|a-z]"\n" {words++;ch++;line++;} 
+[A-Z|a-z] {ch++;}
+ "." {printf("No of words:%d\nNo of characters:%d\nNo of lines:%d\n",words,ch,line);}
+ . {} 
+%% 
+int main{
+printf("enter");
+yylex(); 
+return 0;}
+
